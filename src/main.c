@@ -4,6 +4,7 @@
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_matrix.h>
 
+#include "defs.h"
 #include "io.h"
 
 gsl_matrix *matrix_from_vector(double *vector, size_t n);
@@ -32,6 +33,8 @@ int main(int argc, char *argv[])
     size_t n = read_matrix_file(fname, &vector);
     gsl_matrix *M = matrix_from_vector(vector, n);
     free(vector);
+
+    printf("Max V: %d  E: %d\n", MAX_VERTICES, MAX_EDGES);
 
     gsl_matrix_fprintf(stdout, M, "%.2f");
 

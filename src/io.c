@@ -4,7 +4,7 @@
  * Read the matrix file as specified and store all distances in
  * a vector of doubles.
  *
- * Returns the order of matrix as an integer
+ * Returns the order of matrix as an integer, 0 on failure.
  *
  */
 size_t read_matrix_file(char *fname, double **p_vector)
@@ -43,14 +43,14 @@ size_t read_matrix_file(char *fname, double **p_vector)
     }
 
     /* Allocates the array */
-    *p_vector = realloc(*p_vector, n * n * sizeof **p_vector);
-    if (p_vector == NULL) {
+    double * t_vector = realloc(*p_vector, n * n * sizeof **p_vector);
+    if (t_vector == NULL) {
         perror("realloc");
         return(0);
     }
+    *p_vector = t_vector;
 
     double *vector = *p_vector;
-    memset(vector, 0, n * n * sizeof *vector);
 
     /* Reads the elements */
     int b;
@@ -67,7 +67,7 @@ size_t read_matrix_file(char *fname, double **p_vector)
         for (size_t j=0; j < n; j++) {
             if(sscanf(elem_ptr, "%lf%n", &elem, &b) != 1) {
                 perror("sscanf");
-                return(1);
+                return(0);
             }
             vector[n*i+j] = elem;
             elem_ptr += b;
@@ -77,4 +77,3 @@ size_t read_matrix_file(char *fname, double **p_vector)
     
     return n;
 }
-

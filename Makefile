@@ -2,7 +2,8 @@ BIN := main
 
 SRC_DIR := ./src
 OBJ_DIR := ./objs
-INCLUDES := -I./src
+UTIL_DIR := ./util
+INCLUDES := -I./src 
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
@@ -29,12 +30,13 @@ endif
 PROF_CFLAGS := -pg
 OPTMIZATION_CFLAGS := -O2 
 DEBUG_CFLAGS := -g -ggdb
-PEDANTIC_CFLAGS := -std=c11 -pedantic -Werror -Wall -W
+PEDANTIC_CFLAGS := -std=c11 -pedantic -Werror -Wall -W -Wno-unused-function -Wno-unused-variable -Wno-unused-parameter
 MATH_CFLAGS := -Wmissing-prototypes -Wstrict-prototypes \
   -Wconversion -Wshadow -Wpointer-arith \
   -Wcast-qual -Wcast-align \
   -Wwrite-strings -Wnested-externs \
   -fshort-enums -fno-common -Dinline= 
+GLIB_CFLAGS = $(shell pkg-config --cflags glib-2.0)
 
 
 # COMMENT FLAGS DECLARATION ABOVE NOT ASSINGMENT BELOW
@@ -51,12 +53,14 @@ CFLAGS += $(OPTMIZATION_CFLAGS)
 CFLAGS += $(PROF_CFLAGS)
 CFLAGS += $(PEDANTIC_CFLAGS)
 CFLAGS += $(MATH_CFLAGS)
+CFLAGS += $(GLIB_CFLAGS)
 
 # Linker Flags
 #PROF_LDFLAGS := -pg
 # TEST_LDFLAGS = -lcunit
 
 LDFLAGS := -lm -lgsl
+LDFLAGS += $(shell pkg-config --libs glib-2.0)
 LDFLAGS += $(PROF_LDFLAGS) 
 
 # Valgrind suppression files
@@ -71,7 +75,7 @@ $(BIN): $(OBJ_FILES)
 	$(CC) $(INCLUDES) -o $@ $^ $(LDFLAGS) 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) -c $< -o $@ 
+	$(CC) $(INCLUDES) $(CFLAGS) $(GLIB_CFLAGS) $(CPPFLAGS) -c $< -o $@ 
 
 clean: 
 	rm -rf $(BIN) $(OBJ_FILES) $(PERF_FILES) gmon*.out

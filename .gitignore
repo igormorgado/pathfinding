@@ -1,3 +1,4 @@
+buildir/
 main
 # Prerequisites
 *.d

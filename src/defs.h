@@ -10,7 +10,5 @@
 /* Should be >= MAX_VERTICES */
 #define MAX_HEAP MAX_VERTICES
 
-#define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
-#define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
 
 #endif /* __DEFS_H__ */

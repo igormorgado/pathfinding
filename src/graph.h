@@ -7,25 +7,26 @@
 struct graph
 {
     GHashTable  *nodes;         // A list of nodes in graph
+    gsize n;                    // number of nodes;
 };
 
 struct node
 {
-    GPtrArray   *neighbors;      // A list of all adjacent nodes
-    gint         weight;            // Node weight
-    GString     *label;        // Node label
+    GPtrArray   *neighbors;     // A list of all adjacent nodes
+    gint         weight;        // Node weight
+    GString     *label;         // Node label
 };
 
 struct neighbor
 {
-    struct node *dst;      // The node that is pointed too
-    gint         weight;            // Edge SRC->DST weight
+    struct node *dst;           // The node that is pointed too
+    gint         weight;        // Edge SRC->DST weight
 };
 
 
 /* Creation functions */
-struct graph    *graph_new                     (void);
-struct node     *graph_node_add                (struct graph       *graph, 
+struct graph     *graph_new                     (void);
+struct node      *graph_node_add                (struct graph       *graph, 
                                                  gchar              *label, 
                                                  gint                weight);
 
@@ -40,7 +41,7 @@ void              graph_edge_add_by_label       (struct graph       *graph,
                                                  gint                weight);
 
 /* Manipulation functions */
-struct node     *graph_node                    (struct graph       *graph, 
+struct node      *graph_node                    (struct graph       *graph, 
                                                  gchar              *label);
 
 /* Print functions */

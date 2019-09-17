@@ -23,11 +23,13 @@ And respective `by_label` functions.
 
     '''
     struct graph *G = graph_new()
-    G = graph_fill({
-      {"A", "B", 1}, {"A", "C", 5}, {"B", "D", 7}
-    }) 
+    graph_fill_edges(G, 
+                     {
+                       {"A", "B", 1}, 
+                       {"A", "C", 5}, 
+                       {"B", "D", 7}
+                     }) 
     '''
 
-    That need to pay attention that edge "A,B" is declared before "B", therefore
-    it needs a the constructor check these edge cases and deal properly.
-    
+    or maybe isn't that a good idea
+

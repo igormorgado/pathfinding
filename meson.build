@@ -1,5 +1,6 @@
 # vim:ts=4:sw=4:et:tw=0:ft=python
 project('pathfinding', 'c')
+
 add_project_arguments(['-std=c11',
                        '-Wcast-qual',
                        '-Wno-unused-variable',
@@ -8,15 +9,20 @@ add_project_arguments(['-std=c11',
                       language: 'c')
 
 bin = 'main'
+bfs = 'bfs'
 
 deps = [dependency('glib-2.0'),
         dependency('gsl')]
 
-src = ['src/main.c',
-       'src/graph.c',
-       'src/io.c',
-       'src/matrix.c']
+mainsrc = ['src/main.c',
+           'src/graph.c',
+           'src/io.c',
+           'src/matrix.c']
+
+bfssrc = ['src/bfs.c',
+          'src/graph.c']
     
-executable(bin, sources: src, dependencies: deps)
+executable(bin, sources: mainsrc, dependencies: deps)
+executable(bfs, sources: bfssrc, dependencies: deps)
 
 

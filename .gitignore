@@ -1,4 +1,6 @@
 buildir/
+builddir/
+_build/
 main
 # Prerequisites
 *.d

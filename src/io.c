@@ -7,7 +7,9 @@
  * Returns the order of matrix as an integer, 0 on failure.
  *
  */
-size_t read_matrix_file(char *fname, double **p_vector)
+size_t 
+read_matrix_file(char    *fname, 
+                 double **p_vector)
 {
     /* Check if file exists */
     if(access(fname, F_OK) == -1) {

@@ -12,15 +12,15 @@ graph_free (struct graph *g)
 void
 graph_node_value_destroyed (gpointer value)
 {
-    if (((struct node*)value)->neighbors) 
-        g_ptr_array_unref (((struct node*)value)->neighbors);
+    if (((struct node*)value)->edges) 
+        g_ptr_array_unref (((struct node*)value)->edges);
     g_string_free (((struct node*)value)->label, TRUE);
     g_free ((struct node*)value);
 }
 
 
 void 
-graph_node_neighbor_destroyed(gpointer n)
+graph_node_edge_destroyed(gpointer n)
 {
     g_free(n);
 }
@@ -43,7 +43,7 @@ graph_node_add(struct graph *graph,
                gint          weight)
 {
     struct node * n = g_new(struct node, 1);
-    n->neighbors = g_ptr_array_new_full(1, (GDestroyNotify)graph_node_neighbor_destroyed);
+    n->edges = g_ptr_array_new_full(1, (GDestroyNotify)graph_node_edge_destroyed);
     n->weight = weight;
     n->label = g_string_new(label);
     g_hash_table_insert(graph->nodes, label, n);
@@ -57,10 +57,10 @@ graph_edge_add(struct graph *graph,
                struct node  *dst, 
                gint          weight)
 {
-    struct neighbor * n = g_new(struct neighbor, 1);
+    struct edge * n = g_new(struct edge, 1);
     n->dst = dst;
     n->weight = weight;
-    g_ptr_array_add(src->neighbors, n);
+    g_ptr_array_add(src->edges, n);
 }
 
 
@@ -86,7 +86,7 @@ graph_edge_add_by_label(struct graph *graph,
 
 
 void 
-graph_neighbors_print(struct neighbor  *n, 
+graph_edges_print(struct edge  *n, 
                       gpointer          user_data)
 {
     g_printf("%s(%d), ", n->dst->label->str, n->weight);
@@ -99,7 +99,7 @@ graph_node_print(gpointer       key,
                  gpointer       user_data)
 {
     g_printf("%s(%d) -> ", (gchar*)key, value->weight);
-    g_ptr_array_foreach(value->neighbors, (GFunc)graph_neighbors_print, NULL);
+    g_ptr_array_foreach(value->edges, (GFunc)graph_edges_print, NULL);
     g_printf("\n");
 }
 

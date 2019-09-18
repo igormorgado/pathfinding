@@ -1,4 +1,14 @@
-TRABALHO 1 - Inteligência Computacional e Artificial
+# INSTALL
+
+'''
+  pip install meson ninja
+  mkdir _build
+  cd _build
+  meson
+  ninja
+'''
+
+# TRABALHO 1 - Inteligência Computacional e Artificial
 Prof. Igor Machado Coelho - IME/UERJ
 
 Formem grupos da seguinte forma:

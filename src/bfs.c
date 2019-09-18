@@ -77,10 +77,10 @@ main (int argc,
     // struct node *n = g_hash_table_lookup(map->nodes, center);
     // printf("%s(%d)\n", n->label->str, n->weight);
     // printf("Hash table size %d\n", g_hash_table_size(map->nodes));
-    // printf("Gptrarray len %d\n", n->neighbors->len);
-    // struct GPtrArray *p = g_ptr_array_index(n->neighbors, 1);
-    // struct neighbor *neigh = p->pdata;
-    // printf("%s(%d)\n", neigh->dst->label->str, neigh->weight);
+    // printf("Gptrarray len %d\n", n->edges->len);
+    // struct GPtrArray *p = g_ptr_array_index(n->edges, 1);
+    // struct edge *edg = p->pdata;
+    // printf("%s(%d)\n", edg->dst->label->str, edg->weight);
 
     // graph_print(map);
     graph_free(map);

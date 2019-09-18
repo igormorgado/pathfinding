@@ -12,12 +12,12 @@ struct graph
 
 struct node
 {
-    GPtrArray   *neighbors;     // A list of all adjacent nodes
+    GPtrArray   *edges;     // A list of all adjacent nodes
     gint         weight;        // Node weight
     GString     *label;         // Node label
 };
 
-struct neighbor
+struct edge
 {
     struct node *dst;           // The node that is pointed too
     gint         weight;        // Edge SRC->DST weight
@@ -51,13 +51,13 @@ void              graph_node_print              (gpointer            key,
                                                  struct node        *value,
                                                  gpointer            user_data);
 
-void              graph_neighbors_print         (struct neighbor    *n,
+void              graph_edges_print             (struct edge    *n,
                                                  gpointer            user_data);
 
 /* Free functions */
 void              graph_free                    (struct graph       *g);
 
-void              graph_node_neighbor_destroyed (gpointer            n);
+void              graph_node_edge_destroyed     (gpointer            n);
 
 void              graph_node_value_destroyed    (gpointer            value);
 

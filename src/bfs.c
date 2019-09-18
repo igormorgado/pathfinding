@@ -35,10 +35,9 @@ main (int argc,
         }
     }
     
-    graph_print(map);
 
 
-    //char north[3], south[3], west[3], east[3], center[3];
+    char north[3], south[3], west[3], east[3], center[3];
     // for(int i=1; i<3; i++) {
     //     for(int j=1; j<8; j++) {
     //         strcpy(center, labels[i     * COLS + j  ]);
@@ -54,26 +53,26 @@ main (int argc,
     // }
 
 
-    // /* Create edges */
-    // for(int i=1; i<3; i++) {
-    //     for(int j=1; j<8; j++) {
-    //         sprintf(center, "%c%c", i+97,   j+97);
-    //         sprintf(north,  "%c%c", i+97-1, j+97);
-    //         sprintf(south,  "%c%c", i+97+1, j+97);
-    //         sprintf(west,   "%c%c", i+97,   j+97-1);
-    //         sprintf(east,   "%c%c", i+97,   j+97+1);
-    //         graph_edge_add_by_label(map, center, north, 1);
-    //         graph_edge_add_by_label(map, center, south, 2);
-    //         graph_edge_add_by_label(map, center, west,  3);
-    //         graph_edge_add_by_label(map, center, east,  4);
-    //         printf("N: %s->%s(%d) ", center, north, 1);
-    //         printf("S: %s->%s(%d) ", center, south, 2);
-    //         printf("W: %s->%s(%d) ", center, west,  3);
-    //         printf("E: %s->%s(%d) ", center, east,  4);
-    //         printf("\n");
-    //     }
-    //     printf("\n");
-    // }
+    /* Create edges */
+    for(int i=1; i<3; i++) {
+        for(int j=1; j<8; j++) {
+            sprintf(center, "%c%c", i+97,   j+97);
+            sprintf(north,  "%c%c", i+97-1, j+97);
+            sprintf(south,  "%c%c", i+97+1, j+97);
+            sprintf(west,   "%c%c", i+97,   j+97-1);
+            sprintf(east,   "%c%c", i+97,   j+97+1);
+            graph_edge_add_by_label(map, center, north, 1);
+            graph_edge_add_by_label(map, center, south, 2);
+            graph_edge_add_by_label(map, center, west,  3);
+            graph_edge_add_by_label(map, center, east,  4);
+            printf("N: %s->%s(%d) ", center, north, 1);
+            printf("S: %s->%s(%d) ", center, south, 2);
+            printf("W: %s->%s(%d) ", center, west,  3);
+            printf("E: %s->%s(%d) ", center, east,  4);
+            printf("\n");
+        }
+        printf("\n");
+    }
     // struct node *n = g_hash_table_lookup(map->nodes, center);
     // printf("%s(%d)\n", n->label->str, n->weight);
     // printf("Hash table size %d\n", g_hash_table_size(map->nodes));
@@ -82,6 +81,6 @@ main (int argc,
     // struct edge *edg = p->pdata;
     // printf("%s(%d)\n", edg->dst->label->str, edg->weight);
 
-    // graph_print(map);
+    graph_print(map);
     graph_free(map);
 }

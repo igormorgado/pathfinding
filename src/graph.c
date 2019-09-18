@@ -32,7 +32,8 @@ graph_new(void)
     struct graph * g = g_new(struct graph, 1);
     g->nodes = g_hash_table_new_full(
             g_str_hash, g_str_equal,
-            NULL, (GDestroyNotify)graph_node_value_destroyed);
+            (GDestroyNotify)g_free, 
+            (GDestroyNotify)graph_node_value_destroyed);
     return g;
 }
 
@@ -46,7 +47,7 @@ graph_node_add(struct graph *graph,
     n->edges = g_ptr_array_new_full(1, (GDestroyNotify)graph_node_edge_destroyed);
     n->weight = weight;
     n->label = g_string_new(label);
-    g_hash_table_insert(graph->nodes, label, n);
+    g_hash_table_insert(graph->nodes, g_strdup(label), n);
     return n;
 }
 
